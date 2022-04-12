@@ -34,6 +34,9 @@
     <Media Include="evillaugh.wav">
       <Filter>资源文件</Filter>
     </Media>
+    <Media Include="choose_your_seeds.wav">
+      <Filter>资源文件</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <Text Include="data.txt">

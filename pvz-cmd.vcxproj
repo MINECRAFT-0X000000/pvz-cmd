@@ -146,6 +146,7 @@
     <ClInclude Include="resource1.h" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="choose_your_seeds.wav" />
     <Media Include="crazy_dave.wav" />
     <Media Include="evillaugh.wav" />
   </ItemGroup>

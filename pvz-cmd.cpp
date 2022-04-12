@@ -8,7 +8,7 @@
 /*Define*/#define key(VK_NONAME) ((GetAsyncKeyState(VK_NONAME) & 0x8000) ? 1:0)
 /*Use std namespace*/using namespace std;
 /*Clear stage and grass color*/bool clear,gc[30][20];
-/*Any things*/int bc,zc,pc,cnt,st;
+/*Any things*/int bc,zc,pc,cnt,st=50;
 /*Square*/string sq="██";
 /*User name*/string /*land[11][7], house[3][7],*/ username;
 /*User game data*/short bigstage,smallstage,diamond,coin;
@@ -28,6 +28,7 @@ typedef struct zombie{
     zombie* next;
 }zombie,* zombielist;
 /*Main data*/
+int cyspm(bool z);
 int dele();
 int hin();
 int liste();
@@ -44,7 +45,7 @@ void cur();
 void developer();
 void gcs();
 void logo();
-void nomal();
+void nomal(int b,int s);
 void oland();
 void op();
 void rgb_init();
@@ -188,7 +189,7 @@ void ws();
         for(int j=0; j<29; j++){
             cout<<sq;
         }
-        Sleep(50);
+        Sleep(st);
         cout<<""<<endl;
     }
 }
@@ -462,6 +463,7 @@ void ws();
     if(id==-1)PlaySound(NULL,NULL,SND_FILENAME|SND_ASYNC);
     if(id==0)PlaySound(TEXT("crazy_dave.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
     if(id==1)PlaySound(TEXT("evillaugh.wav"),NULL,SND_FILENAME|SND_ASYNC);
+    if(id==2)PlaySound(TEXT("choose_your_seeds.wav"),NULL,SND_FILENAME|SND_ASYNC|SND_LOOP);
 }
 /*Main page warnning*/int mpw(short j,short b,short s){
     if(j!=0){
@@ -566,7 +568,7 @@ void ws();
         return 0;
     }
     else{
-        //bgm (1);
+        bgm (1);
         for(int i=0; i<40; i++){
             if(i%2==0){
                 srgb(0,255,0,1);
@@ -592,6 +594,7 @@ void ws();
             }
             Sleep(90);
         }
+        nomal(b,s);
         return 1;
     }
 }
@@ -869,18 +872,20 @@ void ws();
         i++;
     }
 }
-/*Nomal game mode*/int nomal(int b,int s){
+/*Nomal game mode*/void nomal(int b,int s){
+    bgm(2);
     cls();
-    while(1){
-        if(_kbhit()){
-            char d;
-            //if(d==)   
-        }
-    }
+    cur(13,25);
+    srgb(0,0,0,2);
+    cout<<"["<<b<<"-"<<s<<"]";
+    cyspm(1);
+    bgm(0);
+    cls();
+    mp(b,s,clear,username);
 }
 /*Choose your seeds page and move*/int cyspm(bool z){
     oland(z);
-    Sleep(1000);
+    Sleep(1500);
     int n=0,v=0,o=0;
     if(z){
         n=18;
@@ -936,10 +941,11 @@ void ws();
         Sleep(100);
     }
     */
+    Sleep(5000);
     return 0;
 }
 /*Main function*/int main(){
-    //bgm(0);//Game bgm set
+    bgm(0);//Game bgm set
     ws();//Window Set
     gcs();//Grass color data set
     freopen("data.txt","r",stdin);//File input by "data.txt"
@@ -947,8 +953,8 @@ void ws();
     zombie* zh=zinit();//Link init
     cin>>clear>>bigstage>>smallstage>>diamond>>coin>>username;//Input user data
     cls();
-    //oland(1);
-    cyspm(1);
+    logo();
+    //cyspm(1);
     while(1){
         /*
         w = wm();
@@ -966,13 +972,14 @@ void ws();
             cout << p.x << " " << p.y<<" "<<cnt<<"     ";
         }
         */
-        zhin(zh,2,0,0.2,1000);
+        /*zhin(zh,2,0,0.2,1000);
         zhin(zh,3,0,0.2,1000);
         for(int i=0; i<20; i++){
             zp(zh);
             Sleep(100);
         }
-        //mp(bigstage, smallstage, 0, username);
+        */
+        mp(bigstage, smallstage, 0, username);
         /*
         hin(head, 1, 0);
         for (int i = 0; i < 3;i++) {
@@ -985,7 +992,6 @@ void ws();
         */
     }
     cout<<"1";
-    Sleep(1000000);
     //cls();
     //logo();//Main logo
     //while(1) {
